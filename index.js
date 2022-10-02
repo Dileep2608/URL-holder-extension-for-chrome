@@ -9,7 +9,7 @@ const unEl = document.getElementById("ul-el")
 // to get form local storage
 const leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"))
 
-if(leadsFromLocalStorage){
+if (leadsFromLocalStorage) {
     myLeads = leadsFromLocalStorage
     render(myLeads)
 }
@@ -29,33 +29,31 @@ function render(leads) {
     // .innerHTML = to access html code
     unEl.innerHTML = listItems
 
-
 }
-tabBtn.addEventListener("click",function(){
+tabBtn.addEventListener("click", function () {
     // chrome api to get access to tab url
-    chrome.tabs.query({active:true,currentWindow:true},function(tabs){
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         // here "tabs", be like tabs=[{url: "https://www.youtube.com"}]
         myLeads.push(tabs[0].url)
-        localStorage.setItem("myLeads",JSON.stringify(myLeads))
+        localStorage.setItem("myLeads", JSON.stringify(myLeads))
         render(myLeads)
     })
 })
 
 
-
-deleteBtn.addEventListener("dblclick",function(){
+deleteBtn.addEventListener("dblclick", function () {
     localStorage.clear()
     myLeads = []
     render(myLeads)
-    
+
 })
 // adding .addEventListener
-inputBtn.addEventListener("click",function(){
+inputBtn.addEventListener("click", function () {
     // use ".value", to get value in input text box
     myLeads.push(inputEl.value)
     inputEl.value = ""
     // localstorage.
-    localStorage.setItem("myLeads",JSON.stringify(myLeads))
+    localStorage.setItem("myLeads", JSON.stringify(myLeads))
     render(myLeads)
 })
 
